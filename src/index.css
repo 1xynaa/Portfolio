@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --color-obsidian: #030305;
+  --color-rose: #FF85A2;
+  --color-rose-light: #FFA3B8;
+  --color-lavender: #C084FC;
+  --color-slate-text: #B8B8B8;
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #B8B8B8;
+  --color-text-muted: #9E9E9E;
+}
+
+/* Base reset & typography */
+html {
+  background-color: #030305;
+  color: #F5F5F5;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #030305;
+  color: #F5F5F5;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Accessible, high-contrast readable containers */
+.readable-plate {
+  background: linear-gradient(145deg, rgba(10, 13, 20, 0.88) 0%, rgba(5, 7, 11, 0.94) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9);
+}
+
+.readable-card {
+  background-color: rgba(9, 12, 19, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* Subtle, elegant heartbeat pulse */
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.14);
+  }
+  28% {
+    transform: scale(1.02);
+  }
+  42% {
+    transform: scale(1.10);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+/* Custom heart cursor active only on desktop/fine-pointer devices */
+@media (pointer: fine) {
+  html, body, a, button, [role="button"] {
+    cursor: none !important;
+  }
+  input, textarea, [contenteditable="true"] {
+    cursor: text;
+  }
+}
+
+.hero-backdrop-type {
+  position: absolute;
+  z-index: 0;
+  top: 38%;
+  left: 50%;
+  width: max-content;
+  max-width: 95vw;
+  overflow: hidden;
+  transform: translateX(-50%);
+  color: rgba(255, 163, 184, 0.05);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7.5vw, 8rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.90;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 0 100px rgba(255, 133, 162, 0.10);
+  transition: opacity 700ms ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+:focus-visible {
+  outline: 2px solid #FF85A2;
+  outline-offset: 3px;
+}
+
+/* Cinematic Scene Transitions */
+@keyframes cinematicEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-cinematic-enter {
+  animation: cinematicEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes flashStreak {
+  0% {
+    opacity: 0.7;
+    transform: translateX(-100%) skewX(-20deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(200%) skewX(-20deg);
+  }
+}
+
+.animate-flash-streak {
+  animation: flashStreak 0.65s ease-out forwards;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 133, 162, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 133, 162, 0.55);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  @media (max-width: 640px) {
+    .hero-backdrop-type {
+      top: 23%;
+      font-size: 11vw;
+      letter-spacing: -0.06em;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+code, kbd, samp, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #030305;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2029;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333847;
+}
+
+/* Subtle Film-Grain Overlay Utility */
+.film-grain {
+  background-image: radial-gradient(rgba(255, 133, 162, 0.08) 1px, transparent 0);
+  background-size: 18px 18px;
+}
